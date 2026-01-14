@@ -17,13 +17,6 @@ permissions:
   pages: write
 
 env:
-  # JFrog platform url (for example: https://acme.jfrog.io)
-  JF_URL: ${{ secrets.JF_URL }}
-  JF_USER: ${{ secrets.JF_USER }}
-  JF_REPO: ${{ secrets.JF_REPO }}
-  JF_REPO_HMI: ${{ secrets.JF_REPO_HMI }}
-  # JFrog Platform access token
-  JF_ACCESS_TOKEN: ${{ secrets.JF_ACCESS_TOKEN }}
   INSTANCE: 'docs/ss'
   DOCKER_VERSION: '243.21565'
   ARTIFACT: webHelpSS2-all.zip

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE buildprofiles SYSTEM "https://resources.jetbrains.com/writerside/1.0/build-profiles.dtd">
+<buildprofiles
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/build-profiles.xsd">
+    <build-profile instance="ss">
+        <variables>
+            <color-preset>soft</color-preset>
+            <primary-color>metallic</primary-color>
+            <noindex-content>true</noindex-content>
+        </variables>
+    </build-profile>
+    <footer>
+        <link href="https://northamerica.daimlertruck.com/">Daimler Truck North America</link>
+        <copyright>2024 Daimler Truck North America</copyright>
+    </footer>
+</buildprofiles>

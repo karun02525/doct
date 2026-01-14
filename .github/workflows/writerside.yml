@@ -1,0 +1,33 @@
+name: Deploy Writerside Docs
+
+on:
+  push:
+    branches:
+      - docs   # your default branch (confirmed from screenshot)
+
+permissions:
+  contents: write
+
+jobs:
+  writerside:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Writerside documentation
+        uses: JetBrains/writerside-github-action@v4
+        with:
+          # FORMAT: <module>/<instance>
+          # module = docs (your Writerside module folder)
+          # instance = ss
+          instance: docs/ss
+          artifact: webHelp
+          output: site
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: site

@@ -3,10 +3,12 @@ name: Deploy Writerside Docs
 on:
   push:
     branches:
-      - docs   # your default branch (confirmed from screenshot)
+      - master   # your default branch (confirmed from screenshot)
 
 permissions:
-  contents: write
+  contents: read
+  id-token: write
+  pages: write
 
 jobs:
   writerside:

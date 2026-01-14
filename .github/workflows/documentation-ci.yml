@@ -1,100 +1,36 @@
-name: Build documentation
+name: Writerside Docs
 
 on:
   push:
-    branches: [ "docs" ]
+    branches:
+      - main
+      - docs
   workflow_dispatch:
-  pull_request:
-    types: [ opened,synchronize,edited ]
-
-concurrency:
-  group: ${{ github.head_ref || github.run_id }}
-  cancel-in-progress: true
 
 permissions:
-  contents: read
-  id-token: write
-  pages: write
-
-env:
-  INSTANCE: 'docs/ss'
-  DOCKER_VERSION: '243.21565'
-  ARTIFACT: webHelpSS2-all.zip
+  contents: write
 
 jobs:
-  build:
-    name: build
-    runs-on:
-      group: enterprise/Default
-      labels: Linux
-    timeout-minutes: 60
-    if: startsWith(github.ref, 'refs/heads/docs')
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Build Writerside docs using Docker
-        uses: JetBrains/writerside-github-action@v4
-        with:
-          instance: ${{ env.INSTANCE }}
-          artifact: ${{ env.ARTIFACT }}
-          docker-version: ${{ env.DOCKER_VERSION }}
-
-      - name: Upload artifact with build results
-        uses: actions/upload-artifact@v3
-        with:
-          name: docs
-          path: |
-            artifacts/${{ env.ARTIFACT }}
-            artifacts/report.json
-          retention-days: 7
-
-  test:
-    name: test
-    needs: build
-    runs-on:
-      group: enterprise/Default
-      labels: Linux
-    steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: docs
-          path: artifacts
-
-      - name: Test documentation
-        uses: JetBrains/writerside-checker-action@v1
-        with:
-          instance: ${{ env.INSTANCE }}
-
-  deploy:
-    name: deploy
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: [ build, test ]
-    runs-on:
-      group: enterprise/Default
-      labels: Linux
-    steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v3
-        with:
-          name: docs
-          path: artifacts
-
-      - name: Unzip artifact
-        run: unzip -O UTF-8 -qq "artifacts/${{ env.ARTIFACT }}" -d dir
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Package and upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: dir
+      - name: Build Writerside docs
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/opt/project \
+            jetbrains/writerside:latest \
+            build \
+            --project /opt/project/docs \
+            --instance ss \
+            --output /opt/project/output
 
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v1
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./output

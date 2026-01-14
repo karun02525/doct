@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+    SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile
+    id="ss"
+    name="HMIEvo QR App"
+    start-page="overview.md">
+
+    <toc-element topic="overview.md" toc-title="Overview"/>
+    <toc-element topic="setup.md" toc-title="Setup"/>
+    <toc-element topic="architecture-dataflow.md" toc-title="Architecture &amp; Data Flow"/>
+    <toc-element topic="business-logic.md" toc-title="Business Logic"/>
+    <toc-element topic="ui-ux.md" toc-title="UI &amp; UX"/>
+    <toc-element topic="testing.md"/>
+
+</instance-profile>

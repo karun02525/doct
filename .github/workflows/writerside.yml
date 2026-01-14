@@ -1,9 +1,9 @@
-name: Writerside Documentation
+name: Writerside Docs Deploy
 
 on:
   push:
     branches:
-      - docs
+      - docs   # change if your default branch is main
 
 permissions:
   contents: write
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Build Writerside documentation
+      - name: Build Writerside docs
         uses: JetBrains/writerside-github-action@v4
         with:
           instance: ss

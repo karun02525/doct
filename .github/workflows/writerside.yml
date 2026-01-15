@@ -19,9 +19,9 @@ jobs:
         uses: JetBrains/writerside-github-action@v4
         with:
           path: docs
-          instance: ss
-          artifact: webHelp
-          docker-version: 233.14389
+          instance: 'docs/ss'
+          artifact: webHelpSS2-all.zip
+          docker-version: 243.21565
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

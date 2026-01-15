@@ -20,7 +20,7 @@ jobs:
       - name: Build Writerside
         uses: JetBrains/writerside-github-action@v4
         with:
-          instance: docs/ss
+          instance: ss
           artifact: webHelp
           docker-version: 233.14389
 

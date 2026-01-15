@@ -12,14 +12,14 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
 
       - name: Build Writerside
         uses: JetBrains/writerside-github-action@v4
         with:
-          instance: docs/ss     # 🔥 FIX HERE
+          path: docs
+          instance: ss
           artifact: webHelp
           docker-version: 233.14389
 
@@ -33,6 +33,5 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-
     steps:
       - uses: actions/deploy-pages@v4

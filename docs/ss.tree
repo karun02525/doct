@@ -3,7 +3,7 @@
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 
 <instance-profile id="ss"
-                  name="HMIEvo QR App"
+                  name="Karun Info"
                   start-page="overview.md">
 
     <toc-element topic="overview.md" toc-title="Overview"/>
@@ -13,5 +13,6 @@
     <toc-element topic="ui-ux.md" toc-title="UI &amp; UX"/>
     <toc-element topic="testing.md"/>
     <toc-element topic="resume-page.topic"/>
+    <toc-element topic="api.topic"/>
 
 </instance-profile>

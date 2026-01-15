@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       id="api"
+       title="API Implementation">
+
+    <p>This section describes how to implement and interact with the HMIEvo QR App API.</p>
+
+    <chapter title="Base URL" id="base-url">
+        <code-block lang="text">
+            https://api.hmievo-qr.com/v1
+        </code-block>
+    </chapter>
+
+    <chapter title="Authentication" id="auth">
+        <p>All requests must include a Bearer token in the header:</p>
+        <code-block lang="http">
+            Authorization: Bearer YOUR_TOKEN
+        </code-block>
+    </chapter>
+
+    <chapter title="Endpoint: Generate QR" id="generate-qr">
+        <p> type="info">POST <code>/generate</code></p>
+
+        <p>Generates a unique QR code for HMI synchronization.</p>
+
+        <table column-width="auto">
+            <tr>
+                <td>Parameter</td>
+                <td>Description</td>
+            </tr>
+            <tr>
+                <td><code>device_id</code></td>
+                <td>Unique identifier for the HMI hardware.</td>
+            </tr>
+            <tr>
+                <td><code>payload</code></td>
+                <td>The data to be encoded in the QR.</td>
+            </tr>
+        </table>
+
+        <format style="bold">Request Example:</format>
+        <code-block lang="json">
+            {
+                "device_id": "HMI-9920",
+                "payload": "sync_data_001"
+            }
+        </code-block>
+    </chapter>
+
+    <chapter title="Implementation Guide" id="impl-guide">
+        <procedure title="How to integrate" id="steps">
+            <step>Obtain your API Key from the dashboard.</step>
+            <step>Set up a POST request to the <code>/generate</code> endpoint.</step>
+            <step>Handle the JSON response to display the QR image string.</step>
+        </procedure>
+    </chapter>
+
+</topic>

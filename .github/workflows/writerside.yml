@@ -2,33 +2,41 @@ name: Deploy Writerside Docs
 
 on:
   push:
-    branches:
-      - master   # or main if your default branch is main
+    branches: [ master ]   # or main
 
 permissions:
-  contents: write   # ✅ REQUIRED
+  contents: read
   pages: write
   id-token: write
 
 jobs:
-  writerside:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Build Writerside documentation
+      - name: Build Writerside
         uses: JetBrains/writerside-github-action@v4
         with:
           instance: docs/ss
           artifact: webHelp
-          output: site
+          docker-version: 233.14389
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: site
+          path: artifacts/webHelp
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

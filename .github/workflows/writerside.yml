@@ -24,11 +24,17 @@ jobs:
           artifact: webHelpSS2-all.zip
           docker-version: 243.21565
 
-      # The critical missing step:
-      # We must unzip the artifact into the directory that upload-pages-artifact expects.
       - name: Unzip documentation
         run: |
-          unzip -O UTF-8 webHelpSS2-all.zip -d artifacts/webHelp
+          # This finds the zip file wherever it is and unzips it to the target folder
+          ZIP_PATH=$(find . -name "webHelpSS2-all.zip" | head -n 1)
+          if [ -z "$ZIP_PATH" ]; then
+            echo "Error: webHelpSS2-all.zip not found!"
+            exit 1
+          fi
+          echo "Found artifact at: $ZIP_PATH"
+          mkdir -p artifacts/webHelp
+          unzip -O UTF-8 "$ZIP_PATH" -d artifacts/webHelp
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

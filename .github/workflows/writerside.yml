@@ -3,12 +3,12 @@ name: Deploy Writerside Docs
 on:
   push:
     branches:
-      - master   # your default branch (confirmed from screenshot)
+      - master   # or main if your default branch is main
 
 permissions:
-  contents: read
-  id-token: write
+  contents: write   # ✅ REQUIRED
   pages: write
+  id-token: write
 
 jobs:
   writerside:
@@ -17,13 +17,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Build Writerside documentation
         uses: JetBrains/writerside-github-action@v4
         with:
-          # FORMAT: <module>/<instance>
-          # module = docs (your Writerside module folder)
-          # instance = ss
           instance: docs/ss
           artifact: webHelp
           output: site

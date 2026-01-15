@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE instance-profile
-    SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 
-<instance-profile
-    id="ss"
-    name="HMIEvo QR App"
-    start-page="overview.md">
+<instance-profile id="ss"
+                  name="HMIEvo QR App"
+                  start-page="overview.md">
 
     <toc-element topic="overview.md" toc-title="Overview"/>
     <toc-element topic="setup.md" toc-title="Setup"/>
@@ -13,5 +12,6 @@
     <toc-element topic="business-logic.md" toc-title="Business Logic"/>
     <toc-element topic="ui-ux.md" toc-title="UI &amp; UX"/>
     <toc-element topic="testing.md"/>
+    <toc-element topic="resume-page.topic"/>
 
 </instance-profile>

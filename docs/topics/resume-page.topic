@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE topic
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/xhtml-entities.dtd">
+<topic xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="https://resources.jetbrains.com/writerside/1.0/topic.v2.xsd"
+       id="resume-page"
+       title="Resume">
+
+    <p>
+        You can download the full resume here:
+        <a href="resume.pdf" target="_blank">Download Resume PDF</a>
+    </p>
+
+    <chapter title="Interactive Preview" id="preview-section">
+        <html>
+        <![CDATA[
+            <iframe src="resume.pdf" width="100%" height="800px">
+                <p>Your browser does not support PDFs.
+                   <a href="resume.pdf">Click here to download the PDF file.</a>
+                </p>
+            </iframe>
+            ]]>
+        </html>
+    </chapter>
+</topic>

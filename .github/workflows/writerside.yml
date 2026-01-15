@@ -13,7 +13,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
       - name: Build Writerside
         uses: JetBrains/writerside-github-action@v4
@@ -22,6 +23,12 @@ jobs:
           instance: 'docs/ss'
           artifact: webHelpSS2-all.zip
           docker-version: 243.21565
+
+      # The critical missing step:
+      # We must unzip the artifact into the directory that upload-pages-artifact expects.
+      - name: Unzip documentation
+        run: |
+          unzip -O UTF-8 webHelpSS2-all.zip -d artifacts/webHelp
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
@@ -33,5 +40,8 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

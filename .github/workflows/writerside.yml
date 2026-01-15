@@ -2,7 +2,7 @@ name: Deploy Writerside Docs
 
 on:
   push:
-    branches: [ master ]   # or main
+    branches: [ master ]
 
 permissions:
   contents: read
@@ -14,13 +14,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
       - name: Build Writerside
         uses: JetBrains/writerside-github-action@v4
         with:
-          instance: ss
+          instance: docs/ss     # 🔥 FIX HERE
           artifact: webHelp
           docker-version: 233.14389
 
@@ -34,9 +33,6 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - uses: actions/deploy-pages@v4
